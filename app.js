@@ -1,4 +1,4 @@
-const myLibrary = [
+const myCreatedLibrary = [
     {
         title: "Harry Potter",
         author: "J.K. Rowling",
@@ -20,6 +20,8 @@ const myLibrary = [
     },
 ];
 
+const myLibrary = [];
+
 function Book(title, author, pages, read){
     this.title = title;
     this.author = author;
@@ -31,24 +33,35 @@ function Book(title, author, pages, read){
 }
 
 const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not read yet");
-book1.info();
 console.log(book1.info());
 //addBookToLibrary();
 console.table(myLibrary);
 
-loopLibraryArray();
+
 
 
 function addBookToLibrary() {
-    let title = prompt("What is the book's title?");
-    let author = prompt("What is the book's author?");
-    let pages = parseInt(prompt("How many pages does the book have?"));
-    let read = confirm("Have you read the book?");
+    let title = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let pages = parseInt(document.getElementById("pages").value);
+    let read = document.getElementById("read").value;
 
-    let myBook = {title: title, author: author, pages: pages, read: read};
+    let myBook = new Book(title, author, pages, read);
+    console.log(myBook)
     myLibrary.push(myBook);
+    console.log(myLibrary)
 
 }
+
+
+
+
+const form = document.getElementById("book-submit");
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    addBookToLibrary();
+    loopLibraryArray();
+})
 
 
 function loopLibraryArray() {
@@ -84,4 +97,6 @@ function loopLibraryArray() {
         // bookCard.appendChild(readNode);
     })
 }
+
+
 
