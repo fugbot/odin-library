@@ -42,10 +42,10 @@ console.log(book1.getInfo());
 console.table(myLibrary);
 
 function addBookToLibrary() {
-    let title = document.getElementById("title").value;
-    let author = document.getElementById("author").value;
-    let pages = parseInt(document.getElementById("pages").value);
-    let read = document.getElementById("read").value;
+    let title = document.getElementById("book-title").value;
+    let author = document.getElementById("book-author").value;
+    let pages = parseInt(document.getElementById("book-pages").value);
+    let read = document.getElementById("book-read").value;
 
     let myBook = new Book(title, author, pages, read);
     console.log(myBook)
@@ -89,7 +89,7 @@ function printLastBookCard() {
     bookCard.appendChild(readDiv);
 }
 
-Object.setPrototypeOf(printBookCard.prototype, Book.prototype);
+Object.setPrototypeOf(printLastBookCard.prototype, Book.prototype);
 
 
 
@@ -128,5 +128,14 @@ function printLibraryCards() {
     })
 }
 
+const newBtn = document.querySelector("button#new");
+const dialog = document.querySelector("dialog");
 
+newBtn.addEventListener("click", () => {
+    dialog.showModal();
+})
 
+const closeBtn = document.querySelector(".close");
+closeBtn.addEventListener("click", () => {
+    dialog.close();
+})

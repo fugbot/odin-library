@@ -1,5 +1,46 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
 *:hover {
     border: 2px blue solid;
+}
+
+input,
+form > button {
+  width: 100%;
+  padding: 5px;
+  margin: 0;
+  box-sizing: border-box;
+  display:block;
+  font-family: inherit;
+  font-size: 100%
+  
+}
+
+form > div {
+    margin: 1rem;
+}
+
+input {
+    margin-top: 4px;
+}
+
+dialog > div {
+    display: flex;
+    justify-content: end;
+}
+
+ /* form {
+   display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px; 
+}*/
+
+dialog {
+    width: 20rem;
+    height: 30rem;
 }
 
 .card {
