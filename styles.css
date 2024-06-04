@@ -49,11 +49,19 @@ dialog {
     height: 30rem;
 }
 
+#books {
+    display: grid;
+    
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-column-gap: 1rem;
+    
+}
+
 .card {
     border: 2px black solid;
-    margin: 2px;
+    margin: 1rem;
     padding: 2rem;
-    width: max-content;
+    width: fit-content;
     
 }
 
