@@ -7,6 +7,18 @@
     border: 2px blue solid;
 }
 
+button#new {
+    background-color: #1591e4;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
 input,
 form > button {
   width: 100%;
@@ -32,12 +44,6 @@ dialog > div {
     justify-content: end;
 }
 
- /* form {
-   display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 8px; 
-}*/
-
 dialog {
     width: 20rem;
     height: 30rem;
@@ -46,4 +52,16 @@ dialog {
 .card {
     border: 2px black solid;
     margin: 2px;
+    padding: 2rem;
+    width: max-content;
+    
+}
+
+.svg-container {
+    display: flex;
+    justify-content: end;
+}
+
+.svg-container svg:hover {
+    fill: #1591e4;
 }
