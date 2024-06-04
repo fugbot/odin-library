@@ -41,7 +41,6 @@ console.log(book1.getInfo());
 //addBookToLibrary();
 console.table(myLibrary);
 const svgRemove ='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="16px" width="16px"><title>book-remove</title><path d="M13 19C13 20.1 13.3 21.12 13.81 22H6C4.89 22 4 21.11 4 20V4C4 2.9 4.89 2 6 2H7V9L9.5 7.5L12 9V2H18C19.1 2 20 2.89 20 4V13.09C19.67 13.04 19.34 13 19 13C15.69 13 13 15.69 13 19M22.54 16.88L21.12 15.47L19 17.59L16.88 15.47L15.47 16.88L17.59 19L15.47 21.12L16.88 22.54L19 20.41L21.12 22.54L22.54 21.12L20.41 19L22.54 16.88Z" /></svg>';
-const svgContainer = document.querySelector(".svg-container");
 
 function addBookToLibrary() {
     let title = document.getElementById("book-title").value;
@@ -95,10 +94,14 @@ function printLastBookCard() {
     readDiv.innerHTML = `Read?:  ${JSON.stringify(lastBook.read)} \n`;
     bookCard.appendChild(readDiv);
 
+    const svgContainer = document.createElement("div");
+    svgContainer.className = "svg-container";
     bookCard.appendChild(svgContainer);
-    //svgContainer.innerHTML = "hello";
+    
+    removeBtnContainer = document.createElement("button");
+    svgContainer.appendChild(removeBtnContainer)
     //svgContainer.innerHTML = DOMPurify.sanitize(svgRemove);
-    svgContainer.innerHTML = svgRemove;
+    removeBtnContainer.innerHTML = svgRemove;
 }
 
 Object.setPrototypeOf(printLastBookCard.prototype, Book.prototype);
@@ -124,16 +127,6 @@ function printLibraryCards() {
         const readDiv = document.createElement("div")
         readDiv.innerHTML = `Read?:  ${JSON.stringify(book.read)} \n`;
         bookCard.appendChild(readDiv);
-
-        // const titleNode = document.createTextNode(`title:  ${JSON.stringify(book.title)} \n`);
-        // const authorNode = document.createTextNode("author: " + JSON.stringify(book.author));
-        // const pagesNode = document.createTextNode("pages: " + JSON.stringify(book.pages));
-        // const readNode = document.createTextNode("read?: " + JSON.stringify(book.read));
-
-        // bookCard.appendChild(titleNode);
-        // bookCard.appendChild(authorNode);
-        // bookCard.appendChild(pagesNode);
-        // bookCard.appendChild(readNode);
     })
 }
 
@@ -153,6 +146,22 @@ function closeDialog() {
 closeBtn.addEventListener("click", closeDialog);
 
 function removeBook(){
-        
+    clickedBookCard = event.target.parentNode;
+    console.log(clickedBookCard);
+    //clickedBookCard.remove();
 }
-svgRemove.addEventListener("click", removeBook);
+
+
+document.addEventListener("click", (e) => {
+    //e.preventDefault();
+    if(!e.target.closest(".svg-container>button")) return;
+    clickedBookCard = e.target.closest(".card");
+    console.log(clickedBookCard);
+    if (confirm('Are you sure you want to remove this book?')) {
+        clickedBookCard.remove();
+        console.log('Thing was removed.');
+      } else {
+        // Do nothing!
+        console.log('Thing was not saved to the database.');
+      }
+}, false);
