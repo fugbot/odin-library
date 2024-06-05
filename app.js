@@ -79,29 +79,62 @@ function printLastBookCard() {
     //console.log("last book: " + JSON.stringify(lastBook));
 
     const titleDiv = document.createElement("div")
+    titleDiv.classList = "title";
     titleDiv.innerHTML = `title:  ${JSON.stringify(lastBook.title)} \n`;
     bookCard.appendChild(titleDiv);
 
     const authorDiv = document.createElement("div")
+    authorDiv.classList = "author";
     authorDiv.innerHTML = `author:  ${JSON.stringify(lastBook.author)} \n`;
     bookCard.appendChild(authorDiv);
 
     const pagesDiv = document.createElement("div")
+    pagesDiv.classList = "pages";
     pagesDiv.innerHTML = `pages:  ${JSON.stringify(lastBook.pages)} \n`;
     bookCard.appendChild(pagesDiv);
 
     const readDiv = document.createElement("div")
+    readDiv.classList = "read-status"
     readDiv.innerHTML = `Read?:  ${JSON.stringify(lastBook.read)} \n`;
     bookCard.appendChild(readDiv);
 
-    const svgContainer = document.createElement("div");
-    svgContainer.className = "svg-container";
-    bookCard.appendChild(svgContainer);
+    const functionContainer = document.createElement("div");
+    functionContainer.className = "function-container";
+    bookCard.appendChild(functionContainer);
     
     removeBtnContainer = document.createElement("button");
-    svgContainer.appendChild(removeBtnContainer)
-    //svgContainer.innerHTML = DOMPurify.sanitize(svgRemove);
+    functionContainer.appendChild(removeBtnContainer);
+    //functionContainer.innerHTML = DOMPurify.sanitize(svgRemove);
     removeBtnContainer.innerHTML = svgRemove;
+
+    //read status dropdown
+    const readDropdownContainer = document.createElement("div");
+    readDropdownContainer.classList = "dropdown";
+    functionContainer.appendChild(readDropdownContainer);
+    
+    const readDropdownBtn = document.createElement("button");
+    readDropdownBtn.classList = "readDropBtn";
+    readDropdownBtn.innerHTML = "Read Status";
+    readDropdownContainer.appendChild(readDropdownBtn);
+
+    const readDropdownDiv = document.createElement("div");
+    readDropdownDiv.id = "readDropdown";
+    readDropdownBtn.appendChild(readDropdownDiv);
+
+    const text = ["Read", "Want to Read", "DNF"];
+    text.forEach(function(el) {
+        const readOpt = document.createElement("a");
+        readOpt.className = "status";
+        readOpt.innerHTML = el;
+        readDropdownDiv.appendChild(readOpt);
+    })
+}
+
+function createReadDropdown() {
+
+
+    const readDropdown = document.createElement("button");
+    functionContainer.appendChild(readDropdown);
 }
 
 Object.setPrototypeOf(printLastBookCard.prototype, Book.prototype);
@@ -154,7 +187,7 @@ function removeBook(){
 
 document.addEventListener("click", (e) => {
     //e.preventDefault();
-    if(!e.target.closest(".svg-container>button")) return;
+    if(!e.target.closest(".function-container>button")) return;
     clickedBookCard = e.target.closest(".card");
     console.log(clickedBookCard);
     if (confirm('Are you sure you want to remove this book?')) {
@@ -165,3 +198,25 @@ document.addEventListener("click", (e) => {
         console.log('Thing was not saved to the database.');
       }
 }, false);
+
+
+//dropdown read status
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  } 
