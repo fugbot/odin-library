@@ -93,10 +93,10 @@ function printLastBookCard() {
     pagesDiv.innerHTML = `pages:  ${JSON.stringify(lastBook.pages)} \n`;
     bookCard.appendChild(pagesDiv);
 
-    const readDiv = document.createElement("div")
-    readDiv.classList = "read-status"
-    readDiv.innerHTML = `Read?:  ${JSON.stringify(lastBook.read)} \n`;
-    bookCard.appendChild(readDiv);
+    // const readDiv = document.createElement("div")
+    // readDiv.classList = "read-status"
+    // readDiv.innerHTML = `Read?:  ${JSON.stringify(lastBook.read)} \n`;
+    // bookCard.appendChild(readDiv);
 
     const functionContainer = document.createElement("div");
     functionContainer.className = "function-container";
@@ -113,12 +113,12 @@ function printLastBookCard() {
     // selectLabel.innerHTML = "Select Read Status: "
 
     const select = document.createElement("select");
-    select.id="read-status";
+    select.id = "read-status";
     select.setAttribute("name", "read-status");
     selectContainer.appendChild(select);
 
     const text = ["Select Read Status", "Read", "Want to Read", "DNF"];
-    for(i=0; i<text.length; i++) {
+    for (i = 0; i < text.length; i++) {
         const readOpt = document.createElement("option");
         readOpt.className = "status";
         readOpt.setAttribute("value", [i]);
@@ -131,6 +131,21 @@ function printLastBookCard() {
     functionContainer.appendChild(removeBtnContainer);
     //functionContainer.innerHTML = DOMPurify.sanitize(svgRemove);
     removeBtnContainer.innerHTML = svgRemove;
+
+    //select attribute
+    const readStatusSelects = document.querySelectorAll("select");
+    readStatusSelects.forEach(selectElem => {
+        selectElem.addEventListener("click", function () {
+            const options = selectElem.options;
+            for (let i = 0; i < options.length; i++) {
+                options[i].removeAttribute("selected");
+            }
+            const selectedIndex = selectElem.selectedIndex;
+            options[selectedIndex].setAttribute("selected", "true");
+            lastBook.read = options.value;
+            
+        })
+    })
 
 }
 
@@ -163,29 +178,29 @@ function printLastBookCard() {
 
 Object.setPrototypeOf(printLastBookCard.prototype, Book.prototype);
 
-function printLibraryCards() {
-    myLibrary.forEach(function (book) {
-        const bookCard = document.createElement("div")
-        bookCard.className = "card";
-        document.getElementById("books").appendChild(bookCard);
+// function printLibraryCards() {
+//     myLibrary.forEach(function (book) {
+//         const bookCard = document.createElement("div")
+//         bookCard.className = "card";
+//         document.getElementById("books").appendChild(bookCard);
 
-        const titleDiv = document.createElement("div")
-        titleDiv.innerHTML = `title:  ${JSON.stringify(book.title)} \n`;
-        bookCard.appendChild(titleDiv);
+//         const titleDiv = document.createElement("div")
+//         titleDiv.innerHTML = `title:  ${JSON.stringify(book.title)} \n`;
+//         bookCard.appendChild(titleDiv);
 
-        const authorDiv = document.createElement("div")
-        authorDiv.innerHTML = `author:  ${JSON.stringify(book.author)} \n`;
-        bookCard.appendChild(authorDiv);
+//         const authorDiv = document.createElement("div")
+//         authorDiv.innerHTML = `author:  ${JSON.stringify(book.author)} \n`;
+//         bookCard.appendChild(authorDiv);
 
-        const pagesDiv = document.createElement("div")
-        pagesDiv.innerHTML = `pages:  ${JSON.stringify(book.pages)} \n`;
-        bookCard.appendChild(pagesDiv);
+//         const pagesDiv = document.createElement("div")
+//         pagesDiv.innerHTML = `pages:  ${JSON.stringify(book.pages)} \n`;
+//         bookCard.appendChild(pagesDiv);
 
-        const readDiv = document.createElement("div")
-        readDiv.innerHTML = `Read?:  ${JSON.stringify(book.read)} \n`;
-        bookCard.appendChild(readDiv);
-    })
-}
+//         const readDiv = document.createElement("div")
+//         readDiv.innerHTML = `Read?:  ${JSON.stringify(book.read)} \n`;
+//         bookCard.appendChild(readDiv);
+//     })
+// }
 
 const newBtn = document.querySelector("button#new");
 const dialog = document.querySelector("dialog");
